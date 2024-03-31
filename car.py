@@ -8,8 +8,14 @@ class Car(Serviceable):
         self.battery = Battery
 
     def needs_service(self) -> bool:
-        if(self.engine.needs_service() or self.battery.needs_service()):
+        if self.engine.needs_service():
+            print("Engine needs Service!")
             return True
+        if self.battery.needs_service():
+            print("Battery needs Service!")
+            return True
+        
+        print("Service is not required!")
         return False
 
 
