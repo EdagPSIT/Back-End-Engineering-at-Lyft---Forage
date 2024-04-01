@@ -3,19 +3,28 @@ from battery import Battery
 from engine import Engine
 
 class Car(Serviceable):
-    def __init__(self, Engine, Battery):
+    def __init__(self, Engine, Battery, Tire):
         self.engine = Engine
         self.battery = Battery
+        self.tire = Tire
 
     def needs_service(self) -> bool:
+        Flag = False
+        print("======")
         if self.engine.needs_service():
             print("Engine needs Service!")
-            return True
+            Flag = True
         if self.battery.needs_service():
             print("Battery needs Service!")
-            return True
+            Flag = True
         
-        print("Service is not required!")
-        return False
+        if self.tire.needs_service():
+            print("Tires need Service!")
+            Flag = True
+        
+        if Flag == False:
+            print("Service is not required!")
+        print("======")
+        return Flag
 
 
