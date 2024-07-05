@@ -6,3 +6,14 @@ class Engine(Serviceable):
 
     def needs_service(self) -> bool:
         return self.current_mileage - self.last_service_mileage > self.service_interval
+
+class CapuletEngine(Engine):
+    service_interval = 30000
+
+class SternmanEngine(Engine):
+    def __init__(self, warning_light_on: bool):
+        super().__init__()
+        self.warning_light_on = warning_light_on
+
+    def needs_service(self) -> bool:
+        return self.warning_light_on
