@@ -1,19 +1,21 @@
-# In engine.py
-class Engine(Serviceable):
-    def __init__(self):
-        self.last_service_mileage = 0
-        self.current_mileage = 0
+from serviceable import Serviceable
 
-    def needs_service(self) -> bool:
-        return self.current_mileage - self.last_service_mileage > self.service_interval
+class Engine(Serviceable):
+    def __init__(self, last_service_mileage, current_mileage):
+        self.last_service_mileage = last_service_mileage
+        self.current_mileage = current_mileage
 
 class CapuletEngine(Engine):
-    service_interval = 30000
+    def needs_service(self) -> bool:
+        return self.current_mileage - self.last_service_mileage >= 30000
 
 class SternmanEngine(Engine):
-    def __init__(self, warning_light_on: bool):
-        super().__init__()
+    def __init__(self, warning_light_on):
         self.warning_light_on = warning_light_on
 
     def needs_service(self) -> bool:
         return self.warning_light_on
+
+class WilloughbyEngine(Engine):
+    def needs_service(self) -> bool:
+        return self.current_mileage - self.last_service_mileage >= 60000
